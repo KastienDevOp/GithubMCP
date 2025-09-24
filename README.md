@@ -15,6 +15,8 @@ A Model Context Protocol (MCP) server that provides comprehensive GitHub API int
 ### Branch and Commit Management
 - `list_branches` - List branches in a repository
 - `list_commits` - List commits in a repository
+- `list_repository_contents` - List contents of a repository directory
+- `get_repository_content` - Get content of a file in a repository
 
 ### Fork Management
 - `list_forks` - List forks of a repository
@@ -38,6 +40,8 @@ A Model Context Protocol (MCP) server that provides comprehensive GitHub API int
 - `create_pull_request` - Create a pull request
 - `update_pull_request` - Update a pull request
 - `merge_pull_request` - Merge a pull request
+- `list_pull_request_reviews` - List reviews on a pull request
+- `create_pull_request_review` - Create a review on a pull request
 
 ### Release Management
 - `list_releases` - List releases in a repository
@@ -56,12 +60,18 @@ A Model Context Protocol (MCP) server that provides comprehensive GitHub API int
 ### Webhooks and Automation
 - `list_webhooks` - List webhooks in a repository
 - `create_webhook` - Create a webhook in a repository
+- `list_workflows` - List GitHub Actions workflows in a repository
+- `list_workflow_runs` - List workflow runs for a repository
 
 ### Social Features
 - `star_repository` - Star a repository
 - `unstar_repository` - Unstar a repository
 - `list_notifications` - List notifications for the authenticated user
 - `mark_notifications_read` - Mark notifications as read
+
+### Repository Analytics
+- `get_repository_languages` - Get language breakdown for a repository
+- `get_repository_contributors` - Get contributors for a repository
 
 ### User and System Information
 - `get_authenticated_user` - Get information about the authenticated user
