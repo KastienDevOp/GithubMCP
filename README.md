@@ -47,6 +47,22 @@ A Model Context Protocol (MCP) server that provides comprehensive GitHub API int
 - `search_repositories` - Search for repositories
 - `search_issues` - Search for issues and pull requests
 
+### Project Management
+- `list_labels` - List labels in a repository
+- `create_label` - Create a label in a repository
+- `list_milestones` - List milestones in a repository
+- `create_milestone` - Create a milestone in a repository
+
+### Webhooks and Automation
+- `list_webhooks` - List webhooks in a repository
+- `create_webhook` - Create a webhook in a repository
+
+### Social Features
+- `star_repository` - Star a repository
+- `unstar_repository` - Unstar a repository
+- `list_notifications` - List notifications for the authenticated user
+- `mark_notifications_read` - Mark notifications as read
+
 ### User and System Information
 - `get_authenticated_user` - Get information about the authenticated user
 - `get_rate_limit` - Get current rate limit status
