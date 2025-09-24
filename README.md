@@ -1,70 +1,108 @@
-# github-server MCP Server
+# GitHub MCP Server
 
-A github MCP
-
-This is a TypeScript-based MCP server that implements a simple notes system. It demonstrates core MCP concepts by providing:
-
-- Resources representing text notes with URIs and metadata
-- Tools for creating new notes
-- Prompts for generating summaries of notes
+A Model Context Protocol (MCP) server that provides comprehensive GitHub API integration for AI assistants. This server enables full interaction with GitHub repositories, issues, pull requests, and more through MCP tools.
 
 ## Features
 
-### Resources
-- List and access notes via `note://` URIs
-- Each note has a title, content and metadata
-- Plain text mime type for simple content access
+### Repository Management
+- `list_repositories` - List repositories for any GitHub user
+- `list_my_repositories` - List repositories for the authenticated user (including private)
+- `create_repository` - Create a new repository
+- `get_repository` - Get detailed information about a repository
+- `delete_repository` - Delete a repository
 
-### Tools
-- `create_note` - Create new text notes
-  - Takes title and content as required parameters
-  - Stores note in server state
+### Issue Tracking
+- `list_issues` - List issues in a repository
+- `create_issue` - Create a new issue
 
-### Prompts
-- `summarize_notes` - Generate a summary of all stored notes
-  - Includes all note contents as embedded resources
-  - Returns structured prompt for LLM summarization
+### Branch and Pull Request Management
+- `list_branches` - List branches in a repository
+- `list_pull_requests` - List pull requests in a repository
+- `create_pull_request` - Create a new pull request
 
-## Development
+### User Information
+- `get_authenticated_user` - Get information about the authenticated user
 
-Install dependencies:
+## Setup
+
+### Prerequisites
+- Node.js (v16 or higher)
+- A GitHub Personal Access Token with appropriate permissions
+
+### Installation
+
+1. Clone this repository:
+```bash
+git clone https://github.com/KastienDevOp/GithubMCP.git
+cd GithubMCP
+```
+
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-Build the server:
+3. Build the server:
 ```bash
 npm run build
 ```
+
+### Configuration
+
+Create a GitHub Personal Access Token:
+1. Go to GitHub Settings > Developer settings > Personal access tokens > Tokens (classic)
+2. Generate a new token with the following scopes:
+   - `repo` (Full control of private repositories)
+   - `public_repo` (Access public repositories)
+   - `read:org` (Read org and team membership)
+   - `user` (Update all user data)
+
+### MCP Configuration
+
+Add the server to your MCP settings. For Cline/VSCode, edit:
+`/home/kastien/.config/Windsurf/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "node",
+      "args": ["/path/to/GithubMCP/build/index.js"],
+      "env": {
+        "GITHUB_TOKEN": "your_github_token_here"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
+```
+
+Replace `/path/to/GithubMCP` with the actual path to your cloned repository.
+
+### Usage
+
+Once configured, the GitHub MCP server will be available in your AI assistant. You can use commands like:
+
+- "List my GitHub repositories"
+- "Create a new repository called 'my-project'"
+- "List issues in the KastienDevOp/my-repo repository"
+- "Create an issue titled 'Bug fix needed' in KastienDevOp/my-repo"
+
+## Development
 
 For development with auto-rebuild:
 ```bash
 npm run watch
 ```
 
-## Installation
-
-To use with Claude Desktop, add the server config:
-
-On MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
-
-```json
-{
-  "mcpServers": {
-    "github-server": {
-      "command": "/path/to/github-server/build/index.js"
-    }
-  }
-}
-```
-
 ### Debugging
 
-Since MCP servers communicate over stdio, debugging can be challenging. We recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector), which is available as a package script:
-
+Use the MCP Inspector for debugging:
 ```bash
 npm run inspector
 ```
 
-The Inspector will provide a URL to access debugging tools in your browser.
+## License
+
+This project is open source. See the license file for details.
